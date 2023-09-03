@@ -1,4 +1,3 @@
-"use client";
 import React, { FormEvent, useState } from "react";
 import Input from "./Input";
 import Option from "./Option";
@@ -47,6 +46,13 @@ const Form = () => {
       endereco: usuario.endereco,
       plano: usuario.plano,
     }); */
+    fetch("/api/supabase",{
+      method:"POST",
+      body:JSON.stringify(usuario),
+      headers:{
+        "content-type":"application/json"
+      }
+    })
     router.push("cadastroConcluido");
     console.log(usuario)
   };
