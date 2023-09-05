@@ -7,6 +7,7 @@ const Home = () => {
     <>
     <Head>
       <title>Dados cadastrais</title>
+      <meta name="description" content="Ficha de cadastro para contratação" />
     </Head>
     <main>
       <Form />
