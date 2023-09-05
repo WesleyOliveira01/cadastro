@@ -1,10 +1,18 @@
 import { createClient } from "@supabase/supabase-js";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-const supabaseUrl: string = process.env.SUPABASE_PUBLIC_URL as string;
-const key: string = process.env.SUPABASE_PUBLIC_KEY as string;
+const public_url = process.env.SUPABASE_PUBLIC_URL as string;
+const public_key = process.env.SUPABASE_PUBLIC_KEY as string;
 
-const db = createClient(supabaseUrl, key);
+const db = createClient(public_url, public_key);
+
+const dataAtual = new Date();
+
+const dia = String(dataAtual.getDate()).padStart(2, "0");
+const mes = String(dataAtual.getMonth() + 1).padStart(2, "0");
+const ano = dataAtual.getFullYear();
+
+const dataCadastro = `${dia}/${mes}/${ano}`;
 
 type Data = {
   message: string;
@@ -23,22 +31,24 @@ const controlerMethod = {
   },
 
   async POST(req: NextApiRequest, res: NextApiResponse) {
-    const { nome, cpf, rg, email, telefone, endereco, plano } = req.body;
+    const { nome, cpf, rg, email, telefone, endereco, plano, taxa } = req.body;
 
-    const { data, error } = await db
-      .from("usuarios")
-      .insert({
-        nome: nome,
-        cpf: cpf,
-        rg: rg,
-        email: email,
-        telefone: telefone,
-        endereco: endereco,
-        plano: plano,
-      });
-    if(error){
+    const { data, error } = await db.from("usuarios").insert({
+      created: dataCadastro,
+      nome: nome,
+      cpf: cpf,
+      rg: rg,
+      email: email,
+      telefone: telefone,
+      endereco: endereco,
+      plano: plano,
+      taxa: taxa,
+    });
+    if (error) {
       console.error(error);
-      res.status(httpStatus.BadRequest).json({message:"ops algo deu errado"})
+      res
+        .status(httpStatus.BadRequest)
+        .json({ message: "ops algo deu errado" });
     }
     res
       .status(httpStatus.Sucess)
