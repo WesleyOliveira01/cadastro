@@ -31,7 +31,7 @@ const Form = () => {
   const [rg, setRg] = useState<number | null>();
 
   const date = new Date()
-  const mes = date.getMonth()
+  const mes = date.getMonth() + 1
   const ano = date.getFullYear()
   const mesCadastro = `${mes}/${ano}`
 
