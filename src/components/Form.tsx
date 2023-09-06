@@ -3,7 +3,6 @@ import Input from "./Input";
 import Option from "./Option";
 import { useRouter } from "next/navigation";
 
-
 interface Iusuario {
   nome: string;
   cpf: number;
@@ -12,9 +11,8 @@ interface Iusuario {
   email: string;
   endereco: string;
   plano: string;
-  taxa:string
-  mesCadastro:string
-  como_conheceu:string
+  taxa: string;
+  como_conheceu: string;
 }
 
 const Form = () => {
@@ -30,17 +28,9 @@ const Form = () => {
   const [cpf, setCpf] = useState<number | null>();
   const [rg, setRg] = useState<number | null>();
 
-  const date = new Date()
-  const mes = date.getMonth() + 1
-  const ano = date.getFullYear()
-  const mesCadastro = `${mes}/${ano}`
-
- 
- 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const usuario: Iusuario = {
-      mesCadastro:mesCadastro,
       nome: nome,
       cpf: cpf as number,
       rg: rg as number,
@@ -48,21 +38,19 @@ const Form = () => {
       email: email,
       endereco: endereco,
       plano: plano,
-      taxa:taxa,
-      como_conheceu:comoConheceu
+      taxa: taxa,
+      como_conheceu: comoConheceu,
     };
-    fetch("/api/supabase",{
-      method:"POST",
-      body:JSON.stringify(usuario),
-      headers:{
-        "content-type":"application/json"
-      }
-    })
+    fetch("/api/supabase", {
+      method: "POST",
+      body: JSON.stringify(usuario),
+      headers: {
+        "content-type": "application/json",
+      },
+    });
     router.push("cadastroConcluido");
-    console.log(usuario)
+    console.log(usuario);
   };
-
-  
 
   return (
     <section className="p-2">
@@ -131,7 +119,10 @@ const Form = () => {
 
         <section className="flex flex-col lg:flex-row items-center justify-between gap-2">
           <section className="my-4 lg:w-[50%] w-full">
-            <label htmlFor="planos" className="text-sky-500 block font-semibold my-2">
+            <label
+              htmlFor="planos"
+              className="text-sky-500 block font-semibold my-2"
+            >
               Selecione o plano desejado
             </label>
             <select
@@ -143,9 +134,21 @@ const Form = () => {
             >
               <Option value="" />
               <Option value="300 mega" plano="300 mega" valorPlano="R$ 99,90" />
-              <Option value="400 mega" plano="400 mega" valorPlano="R$ 119,90" />
-              <Option value="500 mega" plano="500 mega" valorPlano="R$ 149,90" />
-              <Option value="600 mega" plano="600 mega" valorPlano="R$ 189,90" />
+              <Option
+                value="400 mega"
+                plano="400 mega"
+                valorPlano="R$ 119,90"
+              />
+              <Option
+                value="500 mega"
+                plano="500 mega"
+                valorPlano="R$ 149,90"
+              />
+              <Option
+                value="600 mega"
+                plano="600 mega"
+                valorPlano="R$ 189,90"
+              />
               <Option value="" />
               <Option
                 value="300 + telelefone"
@@ -170,8 +173,11 @@ const Form = () => {
             </select>
           </section>
           <section className="my-4 lg:w-[50%] w-full">
-            <label htmlFor="taxa" className="text-sky-500 block font-semibold my-2">
-             forma de pagamento da taxa de instalação
+            <label
+              htmlFor="taxa"
+              className="text-sky-500 block font-semibold my-2"
+            >
+              forma de pagamento da taxa de instalação
             </label>
             <select
               required
@@ -182,31 +188,36 @@ const Form = () => {
             >
               <Option value="" />
               <Option value="a vista" plano="R$" valorPlano="150,00 A VISTA" />
-              <Option value="a prazo" plano="R$" valorPlano="195,00 EM ATÉ 3X NO CARTÃO DE CREDITO" />
-          
+              <Option
+                value="a prazo"
+                plano="R$"
+                valorPlano="195,00 EM ATÉ 3X NO CARTÃO DE CREDITO"
+              />
             </select>
           </section>
         </section>
 
         <section className="my-4">
-        <label htmlFor="comoConheceu" className="text-sky-500 block font-semibold my-2">
-              como nos conheceu?
-            </label>
-            <select
-              required
-              name="taxa"
-              id="taxa"
-              className="bg-slate-300 p-3 outline-none rounded-md  w-full"
-              onChange={(e) => setComoConheceu(e.target.value)}
-            >
-              <Option value="" />
-              <Option value="indicacao" valorPlano="Indicação" />
-              <Option value="panfleto" valorPlano="Panfleto" />
-              <Option value="redes sociais" valorPlano="Redes sociais" />
-              <Option value="google" valorPlano="Google" />
-              <Option value="carro de som" valorPlano="Carro de som" />
-          
-            </select>
+          <label
+            htmlFor="comoConheceu"
+            className="text-sky-500 block font-semibold my-2"
+          >
+            como nos conheceu?
+          </label>
+          <select
+            required
+            name="taxa"
+            id="taxa"
+            className="bg-slate-300 p-3 outline-none rounded-md  w-full"
+            onChange={(e) => setComoConheceu(e.target.value)}
+          >
+            <Option value="" />
+            <Option value="indicacao" valorPlano="Indicação" />
+            <Option value="panfleto" valorPlano="Panfleto" />
+            <Option value="redes sociais" valorPlano="Redes sociais" />
+            <Option value="google" valorPlano="Google" />
+            <Option value="carro de som" valorPlano="Carro de som" />
+          </select>
         </section>
 
         <button className="w-full p-3 bg-sky-500 text-slate-100 font-bold rounded-md">
