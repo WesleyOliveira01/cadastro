@@ -11,7 +11,6 @@ const dataAtual = new Date();
 const dia = String(dataAtual.getDate()).padStart(2, "0");
 const mes = String(dataAtual.getMonth() + 1).padStart(2, "0");
 const ano = dataAtual.getFullYear();
-
 const dataCadastro = `${dia}/${mes}/${ano}`;
 
 type Data = {
@@ -31,7 +30,7 @@ const controlerMethod = {
   },
 
   async POST(req: NextApiRequest, res: NextApiResponse) {
-    const { nome, cpf, rg, email, telefone, endereco, plano, taxa } = req.body;
+    const { nome, cpf, rg, email, telefone, endereco, plano, taxa,como_conheceu,mesCadastro } = req.body;
 
     const { data, error } = await db.from("usuarios").insert({
       created: dataCadastro,
@@ -43,6 +42,8 @@ const controlerMethod = {
       endereco: endereco,
       plano: plano,
       taxa: taxa,
+      como_conheceu:como_conheceu,
+      mesCadastro:mesCadastro
     });
     if (error) {
       console.error(error);

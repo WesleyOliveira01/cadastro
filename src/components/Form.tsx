@@ -13,6 +13,8 @@ interface Iusuario {
   endereco: string;
   plano: string;
   taxa:string
+  mesCadastro:string
+  como_conheceu:string
 }
 
 const Form = () => {
@@ -22,14 +24,23 @@ const Form = () => {
   const [endereco, setEndereco] = useState("");
   const [plano, setPlano] = useState("");
   const [taxa, setTaxa] = useState("");
+  const [comoConheceu, setComoConheceu] = useState("");
 
   const [telefone, setTelefone] = useState<number | null>();
   const [cpf, setCpf] = useState<number | null>();
   const [rg, setRg] = useState<number | null>();
 
+  const date = new Date()
+  const mes = date.getMonth()
+  const ano = date.getFullYear()
+  const mesCadastro = `${mes}/${ano}`
+
+ 
+ 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const usuario: Iusuario = {
+      mesCadastro:mesCadastro,
       nome: nome,
       cpf: cpf as number,
       rg: rg as number,
@@ -37,7 +48,8 @@ const Form = () => {
       email: email,
       endereco: endereco,
       plano: plano,
-      taxa:taxa
+      taxa:taxa,
+      como_conheceu:comoConheceu
     };
     fetch("/api/supabase",{
       method:"POST",
@@ -49,6 +61,8 @@ const Form = () => {
     router.push("cadastroConcluido");
     console.log(usuario)
   };
+
+  
 
   return (
     <section className="p-2">
@@ -115,9 +129,9 @@ const Form = () => {
           onChange={(e) => setEndereco(e.target.value)}
         />
 
-        <section className="flex flex-col lg:flex-row items-center justify-between">
-          <section className="my-4 lg:w-[45%] w-full">
-            <label htmlFor="planos" className="text-sky-500 block font-semibold">
+        <section className="flex flex-col lg:flex-row items-center justify-between gap-2">
+          <section className="my-4 lg:w-[50%] w-full">
+            <label htmlFor="planos" className="text-sky-500 block font-semibold my-2">
               Selecione o plano desejado
             </label>
             <select
@@ -155,8 +169,8 @@ const Form = () => {
               />
             </select>
           </section>
-          <section className="my-4 lg:w-[45%] w-full">
-            <label htmlFor="taxa" className="text-sky-500 block font-semibold">
+          <section className="my-4 lg:w-[50%] w-full">
+            <label htmlFor="taxa" className="text-sky-500 block font-semibold my-2">
              forma de pagamento da taxa de instalação
             </label>
             <select
@@ -172,6 +186,27 @@ const Form = () => {
           
             </select>
           </section>
+        </section>
+
+        <section className="my-4">
+        <label htmlFor="comoConheceu" className="text-sky-500 block font-semibold my-2">
+              como nos conheceu?
+            </label>
+            <select
+              required
+              name="taxa"
+              id="taxa"
+              className="bg-slate-300 p-3 outline-none rounded-md  w-full"
+              onChange={(e) => setComoConheceu(e.target.value)}
+            >
+              <Option value="" />
+              <Option value="indicacao" valorPlano="Indicação" />
+              <Option value="panfleto" valorPlano="Panfleto" />
+              <Option value="redes sociais" valorPlano="Redes sociais" />
+              <Option value="google" valorPlano="Google" />
+              <Option value="carro de som" valorPlano="Carro de som" />
+          
+            </select>
         </section>
 
         <button className="w-full p-3 bg-sky-500 text-slate-100 font-bold rounded-md">
