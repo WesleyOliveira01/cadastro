@@ -26,7 +26,7 @@ const Form = () => {
   return (
     <section className="p-2">
       <h1 className="font-semibold text-sky-500 mb-3 text-center text-xl">
-        Prencha os dados abaixo para realizarmos seu cadastro
+        Preencha os dados abaixo para realizarmos seu cadastro
       </h1>
 
       <form
@@ -63,7 +63,7 @@ const Form = () => {
 
         <Input
           name="email"
-          titulo="email"
+          titulo="E-mail"
           placeholder="insira seu E-mail"
           type="email"
           required
@@ -72,7 +72,7 @@ const Form = () => {
 
         <Input
           name="celular"
-          titulo="celular"
+          titulo="Celular"
           placeholder="insira seu celular"
           type="tel"
           required
@@ -81,7 +81,7 @@ const Form = () => {
 
         <Input
           name="endereco"
-          titulo="endereço"
+          titulo="Endereço"
           placeholder="insira seu endereço"
           type="text"
           required
