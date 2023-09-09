@@ -14,6 +14,8 @@ const ano = dataAtual.getFullYear();
 const dataCadastro = `${dia}/${mes}/${ano}`;
 const mesCadastro = `${mes}/${ano}`
 
+
+
 type Data = {
   message: string;
 };
