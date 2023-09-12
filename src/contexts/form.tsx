@@ -15,6 +15,8 @@ export interface IformularioContext extends Iusuario {
   setTaxa: Dispatch<SetStateAction<string>>;
   setTelefone: Dispatch<SetStateAction<number | null>>;
   setComoConheceu: Dispatch<SetStateAction<string>>;
+  setDataVencimento:Dispatch<SetStateAction<string>>;
+  setDataNascimento:Dispatch<SetStateAction<string>>;
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
 
@@ -29,6 +31,8 @@ export const FormularioProvider = ({ children }: Iformulario) => {
   const [plano, setPlano] = useState<string>("");
   const [taxa, setTaxa] = useState<string>("");
   const [comoConheceu, setComoConheceu] = useState<string>("");
+  const [dataNascimento, setDataNascimento] = useState<string>("");
+  const [dataVencimento, setDataVencimento] = useState<string>("");
 
   const [telefone, setTelefone] = useState<number | null>(null);
   const [cpf, setCpf] = useState<number | null>(null);
@@ -47,6 +51,8 @@ export const FormularioProvider = ({ children }: Iformulario) => {
       plano: plano,
       taxa: taxa,
       como_conheceu: comoConheceu,
+      dataNascimento:dataNascimento,
+      dataVencimento:dataVencimento
     };
     fetch("/api/supabase", {
       method: "POST",
@@ -82,6 +88,8 @@ export const FormularioProvider = ({ children }: Iformulario) => {
         setTelefone,
         setComoConheceu,
         handleSubmit,
+        setDataVencimento,
+        setDataNascimento
       }}
     >
       {children}

@@ -33,7 +33,7 @@ const controlerMethod = {
   },
 
   async POST(req: NextApiRequest, res: NextApiResponse) {
-    const { nome, cpf, rg, email, telefone, endereco, plano, taxa,como_conheceu} = req.body;
+    const { nome, cpf, rg, email, telefone, endereco, plano, taxa,como_conheceu,dataVencimento,dataNascimento} = req.body;
 
     const { data, error } = await db.from("usuarios").insert({
       created: dataCadastro,
@@ -46,7 +46,9 @@ const controlerMethod = {
       plano: plano,
       taxa: taxa,
       como_conheceu:como_conheceu,
-      mesCadastro:mesCadastro
+      mesCadastro:mesCadastro,
+      dataNascimento:dataNascimento,
+      dataVencimento:dataVencimento
     });
     if (error) {
       console.error(error);

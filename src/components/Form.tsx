@@ -21,6 +21,8 @@ const Form = () => {
     setTelefone,   
     //@ts-ignore
     handleSubmit,
+    //@ts-ignore
+    setDataNascimento
   }= useFormulario() ;
 
   return (
@@ -42,23 +44,34 @@ const Form = () => {
           onChange={(e) => setNome(e.target.value)}
         />
 
-        <Input
-          name="CPF"
-          titulo="CPF"
-          placeholder="insira seu CPF"
-          maxLength={11}
-          type="number"
-          required
-          onChange={(e) => setCpf(Number(e.target.value))}
-        />
+        <section className="flex flex-col lg:flex-row gap-2">
+          <Input
+            name="CPF"
+            titulo="CPF"
+            placeholder="insira seu CPF"
+            maxLength={11}
+            type="number"
+            required
+            onChange={(e) => setCpf(Number(e.target.value))}
+            w="lg:w-[50%]"
+          />
+          <Input
+            name="RG"
+            titulo="RG"
+            placeholder="insira seu RG"
+            type="number"
+            required
+            w="lg:w-[50%]"
+            onChange={(e) => setRg(Number(e.target.value))}
+          />
+        </section>
 
-        <Input
-          name="RG"
-          titulo="RG"
-          placeholder="insira seu RG"
-          type="number"
+        <Input 
+          name="dataNascimento"
+          titulo="selecione sua data de nascimento"
+          type="date"
           required
-          onChange={(e) => setRg(Number(e.target.value))}
+          onChange={(e) => setDataNascimento(e.target.value)}
         />
 
         <Input

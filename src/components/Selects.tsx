@@ -4,7 +4,7 @@ import useFormulario from "@/contexts/form";
 
 const Selects = () => {
   //@ts-ignore
-  const { setPlano, setTaxa, setComoConheceu } = useFormulario();
+  const { setPlano, setTaxa, setComoConheceu, setDataVencimento, } = useFormulario();
   return (
     <>
       <section className="flex flex-col lg:flex-row items-center justify-between gap-2">
@@ -48,54 +48,100 @@ const Selects = () => {
               plano="600 mega + telefone fixo"
               valorPlano="R$ 217,90"
             />
+            <Option value="" />
+            <Option
+              value="300 + telefone sem fidelidade"
+              plano="300 mega + telefone fixo sem fidelidade"
+              valorPlano="R$ 144,90"
+            />
+            <Option
+              value="400 + telefone sem fidelidade"
+              plano="400 mega + telefone fixo sem fidelidade"
+              valorPlano="R$ 164,90"
+            />
+            <Option
+              value="500 + telefone sem fidelidade"
+              plano="500 mega + telefone fixo sem fidelidade"
+              valorPlano="R$ 194,90"
+            />
+            <Option
+              value="600 + telefone sem fidelidade"
+              plano="600 mega + telefone fixo sem fidelidade"
+              valorPlano="R$ 234,90"
+            />
           </select>
         </section>
+
         <section className="my-4 lg:w-[50%] w-full">
           <label
-            htmlFor="taxa"
+            htmlFor="planos"
             className="text-sky-500 block font-semibold my-2"
           >
-            forma de pagamento da taxa de instalação
+            Selecione a data de vencimento desejada
+          </label>
+          <select
+            required
+            name="planos"
+            id="planos"
+            className="bg-slate-300 p-3 outline-none rounded-md  w-full"
+            onChange={(e) => setDataVencimento(e.target.value)}
+          >
+            <Option value="" />
+            <Option value="10"  valorPlano="Dia 10" />
+            <Option value="20"  valorPlano="Dia 20" />
+            
+            
+          </select>
+        </section>
+        
+      </section>
+
+      <section className="flex flex-col lg:flex-row gap-2">
+        <section className="my-4 lg:w-[50%] w-full">
+            <label
+              htmlFor="taxa"
+              className="text-sky-500 block font-semibold my-2"
+            >
+              forma de pagamento da taxa de instalação
+            </label>
+            <select
+              required
+              name="taxa"
+              id="taxa"
+              className="bg-slate-300 p-3 outline-none rounded-md  w-full"
+              onChange={(e) => setTaxa(e.target.value)}
+            >
+              <Option value="" />
+              <Option value="a vista" plano="R$" valorPlano="150,00 A VISTA" />
+              <Option
+                value="a prazo"
+                plano="R$"
+                valorPlano="195,00 EM ATÉ 3X NO CARTÃO DE CREDITO"
+              />
+            </select>
+          </section>
+        <section className="my-4 lg:w-[50%] w-full">
+          <label
+            htmlFor="comoConheceu"
+            className="text-sky-500 block font-semibold my-2"
+          >
+            como nos conheceu?
           </label>
           <select
             required
             name="taxa"
             id="taxa"
             className="bg-slate-300 p-3 outline-none rounded-md  w-full"
-            onChange={(e) => setTaxa(e.target.value)}
+            onChange={(e) => setComoConheceu(e.target.value)}
           >
             <Option value="" />
-            <Option value="a vista" plano="R$" valorPlano="150,00 A VISTA" />
-            <Option
-              value="a prazo"
-              plano="R$"
-              valorPlano="195,00 EM ATÉ 3X NO CARTÃO DE CREDITO"
-            />
+            <Option value="Indicação" valorPlano="Indicação" />
+            <Option value="Panfleto" valorPlano="Panfleto" />
+            <Option value="Redes sociais" valorPlano="Redes sociais" />
+            <Option value="Google" valorPlano="Google" />
+            <Option value="Carro de som" valorPlano="Carro de som" />
           </select>
         </section>
-      </section>
-
-      <section className="my-4">
-        <label
-          htmlFor="comoConheceu"
-          className="text-sky-500 block font-semibold my-2"
-        >
-          como nos conheceu?
-        </label>
-        <select
-          required
-          name="taxa"
-          id="taxa"
-          className="bg-slate-300 p-3 outline-none rounded-md  w-full"
-          onChange={(e) => setComoConheceu(e.target.value)}
-        >
-          <Option value="" />
-          <Option value="Indicação" valorPlano="Indicação" />
-          <Option value="Panfleto" valorPlano="Panfleto" />
-          <Option value="Redes sociais" valorPlano="Redes sociais" />
-          <Option value="Google" valorPlano="Google" />
-          <Option value="Carro de som" valorPlano="Carro de som" />
-        </select>
       </section>
     </>
   );
