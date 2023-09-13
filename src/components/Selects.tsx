@@ -140,6 +140,7 @@ const Selects = () => {
             <Option value="Redes sociais" valorPlano="Redes sociais" />
             <Option value="Google" valorPlano="Google" />
             <Option value="Carro de som" valorPlano="Carro de som" />
+            <Option value="Já é/foi cliente" valorPlano="Já é/foi cliente" />
           </select>
         </section>
       </section>
