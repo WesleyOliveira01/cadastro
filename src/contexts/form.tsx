@@ -6,17 +6,22 @@ interface Iformulario {
   children: React.ReactNode;
 }
 export interface IformularioContext extends Iusuario {
+  cep:string
+  rua:string
   setNome: Dispatch<SetStateAction<string >>;
   setEmail: Dispatch<SetStateAction<string>>;
   setRg: Dispatch<SetStateAction<number | null>>;
   setCpf: Dispatch<SetStateAction<number | null>>;
-  setEndereco: Dispatch<SetStateAction<string>>;
   setPlano: Dispatch<SetStateAction<string>>;
   setTaxa: Dispatch<SetStateAction<string>>;
   setTelefone: Dispatch<SetStateAction<number | null>>;
   setComoConheceu: Dispatch<SetStateAction<string>>;
   setDataVencimento:Dispatch<SetStateAction<string>>;
   setDataNascimento:Dispatch<SetStateAction<string>>;
+  setRua:Dispatch<SetStateAction<string>>;
+  setCep:Dispatch<SetStateAction<string>>;
+  setComplemento:Dispatch<SetStateAction<string>>;
+  setNumero:Dispatch<SetStateAction<number | null>>
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
 
@@ -25,9 +30,16 @@ FormularioContext.displayName = "formulario";
 
 export const FormularioProvider = ({ children }: Iformulario) => {
   const router = useRouter();
+
+  const [rua,setRua] = useState<string>("");
+  const [cep,setCep] = useState<string>("");
+  const [complemento,setComplemento] = useState<string>("");
+  const [numero,setNumero] = useState<number | null>(null);
+  const endereco = `${rua},${numero} ${complemento}, ${cep}`
+
   const [nome, setNome] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [endereco, setEndereco] = useState<string>("");
+  
   const [plano, setPlano] = useState<string>("");
   const [taxa, setTaxa] = useState<string>("");
   const [comoConheceu, setComoConheceu] = useState<string>("");
@@ -77,7 +89,6 @@ export const FormularioProvider = ({ children }: Iformulario) => {
         cpf,
         setCpf,
         endereco,
-        setEndereco,
         plano,
         setPlano,
         taxa,
@@ -89,7 +100,13 @@ export const FormularioProvider = ({ children }: Iformulario) => {
         setComoConheceu,
         handleSubmit,
         setDataVencimento,
-        setDataNascimento
+        setDataNascimento,
+        setRua,
+        setCep,
+        setComplemento,
+        setNumero,
+        cep,
+        rua
       }}
     >
       {children}

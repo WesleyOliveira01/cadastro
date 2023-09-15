@@ -1,29 +1,32 @@
 import React from "react";
 import Input from "./Input";
-import Option from "./Option";
 import useFormulario from "@/contexts/form";
-import Selects from './Selects';
+import Selects from "./Selects";
 
 const Form = () => {
- 
   const {
-    //@ts-ignore
     setNome,
-    //@ts-ignore
     setEmail,
-    //@ts-ignore
     setRg,
-    //@ts-ignore
     setCpf,
-    //@ts-ignore
-    setEndereco,
-    //@ts-ignore
-    setTelefone,   
-    //@ts-ignore
+    setTelefone,
     handleSubmit,
-    //@ts-ignore
-    setDataNascimento
-  }= useFormulario() ;
+    setDataNascimento,
+    setRua,
+    setCep,
+    setComplemento,
+    setNumero,
+    rua,
+    cep,
+  } = useFormulario();
+
+  const handleEndereco = (cep: string) => {
+     fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      .then((res) => res.json())
+      .then((data) => {
+        setRua(data.logradouro)
+      });
+  };
 
   return (
     <section className="p-2">
@@ -66,7 +69,7 @@ const Form = () => {
           />
         </section>
 
-        <Input 
+        <Input
           name="dataNascimento"
           titulo="selecione sua data de nascimento"
           type="date"
@@ -92,17 +95,47 @@ const Form = () => {
           onChange={(e) => setTelefone(Number(e.target.value))}
         />
 
-        <Input
-          name="endereco"
-          titulo="Endereço"
-          placeholder="insira seu endereço"
-          type="text"
-          required
-          onChange={(e) => setEndereco(e.target.value)}
-        />
+        <section className="flex lg:flex-row flex-col gap-2">
+          <Input
+            name="rua"
+            titulo="Rua"
+            placeholder="insira o nome da rua"
+            type="text"
+            value={rua}
+            required
+            onChange={(e) => setRua(e.target.value)}
+            w="lg:w-[50%] w-full"
+          />
+          <Input
+            name="numero"
+            titulo="Numero"
+            type="number"
+            required
+            onChange={(e) => setNumero(Number(e.target.value))}
+            w="lg:w-[50%] w-full"
+          />
+          <Input
+            name="complemento"
+            titulo="complemento"
+            placeholder="numero da casa"
+            type="text"
+            onChange={(e) => setComplemento(e.target.value)}
+            w="lg:w-[50%] w-full"
+          />
+          <Input
+            name="CEP"
+            titulo="CEP"
+            placeholder="ex: 05271240"
+            type="number"
+            required
+            onChange={(e) => setCep(e.target.value.replace(/\D/g, ""))}
+            w="lg:w-[50%] w-full"
+            onBlur={() => handleEndereco(cep)}
+          />
+        </section>
 
         <Selects />
-        
+
         <button className="w-full p-3 bg-sky-500 text-slate-100 font-bold rounded-md hover:opacity-80 duration-300">
           Enviar
         </button>
