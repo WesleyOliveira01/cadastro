@@ -44,7 +44,7 @@ const Form = () => {
           placeholder="insira seu nome completo"
           type="text"
           required
-          onChange={(e) => setNome(e.target.value)}
+          onChange={(e) => setNome(e.target.value.replace(/\b\w/g, (match) => match.toUpperCase()))}
         />
 
         <section className="flex flex-col lg:flex-row gap-2">
@@ -55,7 +55,7 @@ const Form = () => {
             maxLength={11}
             type="number"
             required
-            onChange={(e) => setCpf(Number(e.target.value))}
+            onChange={(e) => setCpf(Number(e.target.value.replace(/\D/g, "")))}
             w="lg:w-[50%]"
           />
           <Input
@@ -65,7 +65,7 @@ const Form = () => {
             type="number"
             required
             w="lg:w-[50%]"
-            onChange={(e) => setRg(Number(e.target.value))}
+            onChange={(e) => setRg(Number(e.target.value.replace(/\D/g, "")))}
           />
         </section>
 
@@ -83,7 +83,7 @@ const Form = () => {
           placeholder="insira seu E-mail"
           type="email"
           required
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value.toLowerCase())}
         />
 
         <Input
