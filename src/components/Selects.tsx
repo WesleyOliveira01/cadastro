@@ -11,7 +11,7 @@ const Selects = () => {
         <section className="my-4 lg:w-[50%] w-full">
           <label
             htmlFor="planos"
-            className="text-sky-500 block font-semibold my-2"
+            className="text-defaultColor block font-semibold my-2"
           >
             Selecione o plano desejado
           </label>
@@ -75,7 +75,7 @@ const Selects = () => {
         <section className="my-4 lg:w-[50%] w-full">
           <label
             htmlFor="planos"
-            className="text-sky-500 block font-semibold my-2"
+            className="text-defaultColor block font-semibold my-2"
           >
             Selecione a data de vencimento desejada
           </label>
@@ -100,7 +100,7 @@ const Selects = () => {
         <section className="my-4 lg:w-[50%] w-full">
             <label
               htmlFor="taxa"
-              className="text-sky-500 block font-semibold my-2"
+              className="text-defaultColor block font-semibold my-2"
             >
               forma de pagamento da taxa de instalação
             </label>
@@ -123,7 +123,7 @@ const Selects = () => {
         <section className="my-4 lg:w-[50%] w-full">
           <label
             htmlFor="comoConheceu"
-            className="text-sky-500 block font-semibold my-2"
+            className="text-defaultColor block font-semibold my-2"
           >
             como nos conheceu?
           </label>

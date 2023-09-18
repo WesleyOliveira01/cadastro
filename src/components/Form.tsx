@@ -30,7 +30,7 @@ const Form = () => {
 
   return (
     <section className="p-2">
-      <h1 className="font-semibold text-sky-500 mb-3 text-center text-xl">
+      <h1 className="font-bold text-defaultColor mb-3 text-center text-xl">
         Preencha os dados abaixo para realizarmos seu cadastro
       </h1>
 
@@ -136,7 +136,7 @@ const Form = () => {
 
         <Selects />
 
-        <button className="w-full p-3 bg-sky-500 text-slate-100 font-bold rounded-md hover:opacity-80 duration-300">
+        <button className="w-full p-3 bg-defaultColor text-textColor font-bold rounded-md hover:opacity-80 duration-300">
           Enviar
         </button>
       </form>
