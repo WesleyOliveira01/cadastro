@@ -8,7 +8,7 @@ interface Ioption{
 
 const Option = ({value,plano,valorPlano}:Ioption) => {
   return (
-    <option className='flex justify-between text-sky-500 w-full' value={value}>
+    <option className='flex justify-between text-textColor w-full' value={value}>
         {plano}
         {valorPlano}
     </option>
