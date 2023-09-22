@@ -1,8 +1,8 @@
-import React from "react";
+import React, { use } from "react";
 import Input from "./Input";
 import useFormulario from "@/contexts/form";
 import Selects from "./Selects";
-
+import {useForm} from 'react-hook-form'
 const Form = () => {
   const {
     setNome,
@@ -20,12 +20,16 @@ const Form = () => {
     cep,
   } = useFormulario();
 
+  const {register} = useForm()
+
   const handleEndereco = (cep: string) => {
-     fetch(`https://viacep.com.br/ws/${cep}/json/`)
+     if(cep.length !== 0){
+      fetch(`https://viacep.com.br/ws/${cep}/json/`)
       .then((res) => res.json())
       .then((data) => {
         setRua(data.logradouro)
       });
+     }
   };
 
   return (
@@ -50,9 +54,10 @@ const Form = () => {
         <section className="flex flex-col lg:flex-row gap-2">
           <Input
             name="CPF"
-            titulo="CPF"
+            titulo="CPF/CNPJ"
             placeholder="insira seu CPF"
-            maxLength={11}
+            maxLength={14}
+            minLength={11}
             type="number"
             required
             onChange={(e) => setCpf(Number(e.target.value.replace(/\D/g, "")))}
@@ -112,15 +117,14 @@ const Form = () => {
             type="number"
             required
             onChange={(e) => setNumero(Number(e.target.value))}
-            w="lg:w-[50%] w-full"
+            w="lg:w-[10%] w-full"
           />
           <Input
             name="complemento"
             titulo="complemento"
-            placeholder="numero da casa"
             type="text"
             onChange={(e) => setComplemento(e.target.value)}
-            w="lg:w-[50%] w-full"
+            w="lg:w-[20%] w-full"
           />
           <Input
             name="CEP"
@@ -129,7 +133,7 @@ const Form = () => {
             type="number"
             required
             onChange={(e) => setCep(e.target.value.replace(/\D/g, ""))}
-            w="lg:w-[50%] w-full"
+            w="lg:w-[20%] w-full"
             onBlur={() => handleEndereco(cep)}
           />
         </section>
@@ -145,3 +149,5 @@ const Form = () => {
 };
 
 export default Form;
+ 
+
